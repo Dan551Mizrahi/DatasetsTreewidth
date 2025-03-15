@@ -88,5 +88,42 @@ where:
 
 ## Output Format
 
+If the `-p` flag is **not** used, the results are printed to the console as a dictionary. This dictionary is structured as follows:
+
+* **Keys:** The keys of the dictionary are the filenames of the hypergraph files (e.g., `"instance1.dat"`, `"instance2.dat"`).
+* **Values:** The values associated with each filename key are themselves dictionaries. These inner dictionaries have two keys:
+    * `"min_fill_in"`:  The value associated with this key is the integer treewidth estimate calculated using the minimum fill-in heuristic.
+    * `"min_degree"`: The value associated with this key is the integer treewidth estimate calculated using the minimum degree heuristic.
+
+**Example of printed dictionary structure:**
+
+{
+"instance1.dat": {
+"min_fill_in": 10,
+"min_degree": 8
+},
+"instance2.dat": {
+"min_fill_in": 12,
+"min_degree": 11
+},
+"instance3.dat": {
+"min_fill_in": 7,
+"min_degree": 7
+}
+}
+
+Otherwise, the results are saved in a CSV file (e.g., `treewidths.csv` or `<dataset_name>_treewidths.csv`). The CSV file has the following header: hypergraph,min_fill_in,min_degree
+
+Each row represents a hypergraph file, and the columns contain:
+
+* `hypergraph`: The name of the hypergraph file.
+* `min_fill_in`: The estimated treewidth calculated using the minimum fill-in heuristic.
+* `min_degree`: The estimated treewidth calculated using the minimum degree heuristic.
+
+
+
 ## Limitations
 
+* Heuristics: The treewidth calculations use approximation heuristics. These heuristics do not guarantee to find the exact treewidth, but they provide reasonable estimates.
+* File Format: The code is specifically designed to work with hypergraph files formatted as described in the Hypergraph Dualization Repository. It may not work correctly with other hypergraph file formats.
+* Computational Cost: Treewidth computation is generally an NP-hard problem. For large hypergraphs, the computation can be time-consuming.
