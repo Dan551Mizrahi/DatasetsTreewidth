@@ -25,8 +25,10 @@ Here's a breakdown of the files in the repository:
 * `treewidth.py`:
     * Contains functions to estimate the treewidth of a graph using the minimum fill-in (`calculate_treewidth_min_fill_in`) and minimum degree (`calculate_treewidth_min_degree`) heuristics.
     * Uses the `networkx` library's approximation algorithms for treewidth.
+    * Because the calculations can be long, we added time limit parameter to the functions.
 * `runOnFolder.py`:
     * Provides the `check_treewidth_of_files_in_folder` function.
+    * There is a default time limit of 3600 seconds (1 hour) for each hypergraph. You can easily change this parameter in the function call.
     * This function iterates through all `.dat` files in a specified folder, reads each hypergraph, calculates its treewidth using both heuristics, and stores the results in a dictionary.
 * `main.py`:
     * The main script to run the treewidth calculations.
@@ -61,6 +63,8 @@ where:
 * `<folder_path>`: The path to the folder containing the hypergraph files (.dat files).
 * `-d` or `--datasets_folder`: (Optional) If this flag is used, the script expects `<folder_path>` to contain multiple subfolders, each containing hypergraph files dataset. The script will process each subfolder separately.
 * `-p` or `--dont_print`: (Optional) By default, results are printed to standard output. If this flag is included, results will be saved to a CSV file instead.
+
+**Remember** that there is a default time limit of 3600 seconds (1 hour) for each hypergraph. You can easily change this parameter in the function call in `runOnFolder.py`.
 
 ## Examples:
 
